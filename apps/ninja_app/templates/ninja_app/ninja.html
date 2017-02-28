@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Disappearing Ninja</title>
+		<meta name="description" content="Enter Content Description Here">
+		<link rel="stylesheet" type="text/css" href="#">
+		<!-- Enter CSS stylesheet file here -->
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script type="text/javascript">
+
+		//JS code here
+
+		</script>
+	</head>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			background: #66FF33;
+		}
+		body{
+			margin: auto;
+			text-align: center;
+		}
+		.ninjaAll{
+			color: white;
+			font-size: 3.5em;
+			text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;
+			margin: 20px 0px 20px 0px;
+		}
+		.pics img{
+			height: 300px;
+			width: 300px;
+			margin: auto;
+			border: 1px solid black;
+		}
+
+		.leoButton input{
+			background: blue;
+			color: white;
+			font-size: 1.25em;
+		}
+		.donButton input{
+			background: purple;
+			color: white;
+			font-size: 1.25em;
+		}
+		.raphButton input{
+			background: red;
+			color: white;
+			font-size: 1.25em;
+		}
+		.mikeButton input{
+			background: orange;
+			color: white;
+			font-size: 1.25em;
+		}
+		.back input{
+			background: #011901;
+			color: white;
+			font-size: 1.25em;
+		}
+	</style>
+	<body>
+		<h1 class="ninjaAll">Ninja Turtles</h1>
+		<div class="pics">
+			{% load staticfiles %}
+
+			{% if check == True %}
+
+				{% if color == 'blue' %}
+					<p class="ninjaAll">Leonardo</p>
+					<img src='{% static 'ninja_app/img/leo.png' %}', alt="Leonardo">
+					<form class="leoButton" action="{% url 'disappear:ninjas_all' %}" method="get">
+						<input type="submit" name="submit" value="All Ninjas">
+					</form>
+					<form class="back" action="{% url 'login_reg:login_reg_success' %}" method="post">
+						{% csrf_token %}
+						<input type="submit" name="submit" value="Back to Homepage">
+					</form>
+				{% elif color == 'purple' %}
+					<p class="ninjaAll">Donatello</p>
+					<img src='{% static 'ninja_app/img/don.png' %}', alt="Donatello">
+					<form class="donButton" action="{% url 'disappear:ninjas_all' %}" method="get">
+						<input type="submit" name="submit" value="All Ninjas">
+					</form>
+					<form class="back" action="{% url 'login_reg:login_reg_success' %}" method="post">
+						{% csrf_token %}
+						<input type="submit" name="submit" value="Back to Homepage">
+					</form>
+				{% elif color == 'red' %}
+					<p class="ninjaAll">Raphael</p>
+					<img src='{% static 'ninja_app/img/raph.png' %}', alt="Raphael">
+					<form class="raphButton" action="{% url 'disappear:ninjas_all' %}" method="get">
+						<input type="submit" name="submit" value="All Ninjas">
+					</form>
+					<form class="back" action="{% url 'login_reg:login_reg_success' %}" method="post">
+						{% csrf_token %}
+						<input type="submit" name="submit" value="Back to Homepage">
+					</form>
+				{% elif color == 'orange' %}
+					<p class="ninjaAll">Michaelangelo</p>
+					<img src='{% static 'ninja_app/img/mike.png' %}', alt="Michaelangelo">
+					<form class="mikeButton" action="{% url 'disappear:ninjas_all' %}" method="get">
+						<input type="submit" name="submit" value="All Ninjas">
+					</form>
+					<form class="back" action="{% url 'login_reg:login_reg_success' %}" method="post">
+						{% csrf_token %}
+						<input type="submit" name="submit" value="Back to Homepage">
+					</form>
+				{% else %}
+				<p class="ninjaAll">April is not a Ninja!</p>
+				<img src='{% static 'ninja_app/img/notapril.png' %}', alt="April">
+				{% endif %}
+			{% else %}
+			<a href="ninjas/blue">
+				<img src='{% static 'ninja_app/img/leo.png' %}', alt="Leonardo">
+			</a>
+			<a href="ninjas/purple">
+				<img src='{% static 'ninja_app/img/don.png' %}', alt="Donatello">
+			</a>
+			<a href="ninjas/red">
+				<img src='{% static 'ninja_app/img/raph.png' %}', alt="Raphael">
+			</a>
+			<a href="ninjas/orange">
+				<img src='{% static 'ninja_app/img/mike.png' %}', alt="Michaelangelo">
+			</a>
+			<form class="back" action="{% url 'login_reg:login_reg_success' %}" method="post">
+				{% csrf_token %}
+				<input type="submit" name="submit" value="Back to Homepage">
+			</form>
+			{% endif %}
+		</div>
+	</body>
+</html>

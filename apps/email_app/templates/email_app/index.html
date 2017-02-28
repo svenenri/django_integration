@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		{% if messages %}
+			{% for message in messages %}
+				<h2>{{message}}</h2>
+			{% endfor %}
+		{% endif %}
+		<h1>Email Validation</h1>
+		<form class="email" action="{% url 'email_validate:email_check' %}" method="post">
+			{% csrf_token %}
+			<label for="email">
+				Email Address:
+				<input type="text" name="email" placeholder="jappleseed@example.com">
+			</label>
+			<input type="submit" name="submit" value="Submit!">
+		</form>
+		<form class="back" action="{% url 'login_reg:login_reg_success' %}" method="post">
+			{% csrf_token %}
+			<input type="submit" name="submit" value="Back to Homepage">
+		</form>
+	</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Login and Registration</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body>
+		<h1>Success Page</h1>
+		{% for info in userInfo %}
+			<h2>Success! Welcome, {{info.first_name}}</h2>
+		{% endfor %}
+		{% if messages %}
+			{% for message in messages %}
+				<p class="errors">{{message}}</p>
+			{% endfor %}
+		{% endif %}
+		<form class="button" action="{% url 'courses:courses_index' %}" method="get">
+			{% csrf_token %}
+			<input type="submit" name="submit" value="Courses">
+		</form>
+		<form class="button" action="{% url 'disappear:ninjas_view' %}" method="get">
+			{% csrf_token %}
+			<input type="submit" name="ninjas" value="Find the Ninjas">
+		</form>
+		<form class="button" action="{% url 'email_validate:email_index' %}" method="get">
+			{% csrf_token %}
+			<input type="submit" name="email" value="Validate an Email">
+		</form>
+		<form class="button" action="{% url 'ninja_gold:gold_index' %}" method="get">
+			{% csrf_token %}
+			<input type="submit" name="gold" value="Play Ninja Gold Game">
+		</form>
+		<form class="return" action="{% url 'login_reg:login_reg_index' %}" method="get">
+			{% csrf_token %}
+			<input type="submit" name="return" value="Log Out">
+		</form>
+	</body>
+</html>

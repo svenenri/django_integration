@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Coures</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body>
+		<h1 class="title">Courses</h1>
+		{% if messages %}
+			{% for message in messages %}
+				<h2>{{message}}</h2>
+			{% endfor %}
+		{% endif %}
+		<div class="courseAdd">
+			<h3><br>Add a new course</br></h3>
+			<form class="add" action="{% url 'courses:courses_process' %}" method="post">
+				{% csrf_token %}
+				<label for="name">
+					Name:
+					<input type="text" name="name">
+				</label>
+				<label for="description">
+					Description:
+					<textarea name="description" rows="1" cols="40"></textarea>
+				</label>
+				<input class="add" type="submit" name="add" value="Add">
+			</form>
+		</div>
+		<div class="courseTable">
+			<h3>Courses</h3>
+			<table>
+				<tr>
+					<th>Course Name</th>
+					<th>Description</th>
+					<th>Date Added</th>
+					<th>Actions</th>
+				</tr>
+				{% for course in allCourses %}
+					<tr>
+						<td>
+							{{course.course_name}}
+						</td>
+						<td>
+							{{course.description}}
+						</td>
+					<td>
+						{{course.created_at}}
+					</td>
+					<td><a href="process/destroy/{{course.id}}">remove</a></td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+		<form class="button" action="{% url 'login_reg:login_reg_success' %}" method="post">
+			{% csrf_token %}
+			<input type="submit" name="homeBack" value="Back to Homepage">
+		</form>
+		<!-- <form class="back" action="{% url 'courses:courses_index' %}" method="get">
+			{% csrf_token %}
+			<input type="submit" name="courseBack" value="Back to Courses">
+		</form> -->
+	</body>
+</html>

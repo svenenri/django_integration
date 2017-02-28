@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Integration Project</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body>
+		{% if messages %}
+			{% for message in messages %}
+				<p class="errors">{{message}}</p>
+			{% endfor %}
+		{% endif %}
+		{% if allUsers and allCourses %}
+		<form class="dropdown" action="{% url 'courses:courses_add_user' %}" method="post">
+			{% csrf_token %}
+				<select name="user">
+			{% for user in allUsers %}
+					<option value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option>
+			{% endfor %}
+			</select>
+			<select name="course">
+			{% for course in allCourses %}
+				<option value="{{course.course_name}}">{{course.course_name}}</option>
+			{% endfor %}
+			</select>
+			<input type="submit" name="addUser" value="Add User to Course">
+		</form>
+		{% else %}
+			<h3>No users or courses found.</h3>
+		{% endif %}
+		{% if allCourses %}
+			<table>
+				<tr>
+					<th>Course</th>
+					<th>Title</th>
+					<th>Number of Users</th>
+				</tr>
+				{% for course in allCourses %}
+					<tr>
+						<td>{{course.course_name}}</td>
+						<td>{{course.description}}</td>
+						{% for count in userCount %}
+						<td>{{count.user_count}}</td>
+						{% endfor %}
+					</tr>
+				{% endfor %}
+			</table>
+		{% endif %}
+		<form class="button" action="{% url 'courses:courses_add' %}" method="get">
+			<input type="submit" name="submit" value="Add a Course">
+		</form>
+		<form class="button" action="{% url 'login_reg:login_reg_success' %}" method="post">
+			{% csrf_token %}
+			<input type="submit" name="home" value="Back to Homepage">
+		</form>
+	</body>
+</html>

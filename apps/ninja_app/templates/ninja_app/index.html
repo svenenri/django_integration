@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Disappearing Ninja</title>
+	</head>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			background: #66FF33;
+		}
+		body{
+			margin: auto;
+			text-align: center;
+		}
+		#ninjaNone{
+			color: white;
+			font-size: 3.5em;
+			text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;
+			margin-top: 200px;
+		}
+		.findButton input{
+			background: #018249;
+			color: white;
+			font-size: 1.25em;
+		}
+		.back input{
+			background: #011901;
+			color: white;
+			font-size: 1.25em;
+		}
+	</style>
+	<body>
+		<h1 id="ninjaNone">No Ninjas Here :-(</h1>
+		<form class="findButton" action="{% url 'disappear:ninjas_all' %}" method="get">
+			<input type="submit" name="submit" value="Find Ninjas">
+		</form>
+		<form class="back" action="{% url 'login_reg:login_reg_success' %}" method="post">
+			{% csrf_token %}
+			<input type="submit" name="submit" value="Back to Homepage">
+		</form>
+	</body>
+</html>
