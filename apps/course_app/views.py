@@ -26,6 +26,7 @@ def add(request):
 		'allCourses': getCourses,
 	}
 	return render(request, 'course_app/index.html', context)
+	
 def process(request):
 	if request.method == 'POST':
 		if request.POST['add']:
@@ -45,13 +46,13 @@ def addUser(request):
 	user = request.POST['user']
 	course = request.POST['course']
 	# Add user to course
-	# addUserCourse = Course.courseManager.addUserCourse(user, course)
-	# if addUserCourse[0] == True:
-	# 	messages.success(request, addUserCourse[1])
-	# 	return redirect(reverse('courses:courses_index'))
-	# else:
-	# 	messages.error(request, 'An error occured.')
-	# 	return redirect(reverse('courses:courses_index'))
+	addUserCourse = Course.courseManager.addUserCourse(user, course)
+	if addUserCourse[0] == True:
+		messages.success(request, addUserCourse[1])
+		return redirect(reverse('courses:courses_index'))
+	else:
+		messages.error(request, 'An error occured.')
+		return redirect(reverse('courses:courses_index'))
 	messages.error(request, '\"Add User to Course\" functionality will be added in the future.')
 	return redirect(reverse('courses:courses_index'))
 def destroy(request, id):

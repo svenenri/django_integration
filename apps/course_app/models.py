@@ -39,8 +39,9 @@ class ManageCourse(models.Manager):
 			return confirm
 
 	def addUserCourse(self, user, course):
-		getUser = self.get(user_courses__id = user)
-		getCourse = self.get(id = course)
+		user = int(user)
+		getUser = User.userManager.get(id = user)
+		getCourse = self.get(course_name = course)
 		add = getCourse.user_courses.add(user)
 		confirm = (True, 'User successfully added to the course')
 		return confirm

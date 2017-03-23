@@ -12,7 +12,6 @@ def index(request):
 		return render(request, 'login_reg_app/index.html')
 
 def process(request):
-	postType = request.POST
 	if request.method == 'POST':
 		if request.POST['submit'] == 'Register':
 			# Get registration information
